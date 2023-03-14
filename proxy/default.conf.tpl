@@ -17,7 +17,7 @@ server {
     listen 443 ssl;
     ssl on;
 
-    server_name  backend.unknownchats.com;
+    server_name  tracai.com;
     ssl_certificate /etc/nginx/certs/certificate.crt;
     ssl_certificate_key /etc/nginx/certs/private.key;
 
