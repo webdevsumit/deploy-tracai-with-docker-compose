@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/app
+    environment:
+      - SECRET_KEY=django-insecure-e#h^6zq*w*=0e!df^i)9-%q851s*7-g=ijj$$79%kx96itv-@rp
+      - DEBUG=1
+      - ALLOWED_HOSTS=127.0.0.1,10.0.2.2
+      - ALLOWED_CORS=http://127.0.0.1:3000,http://127.0.0.1,http://127.0.0.1:8000,http://localhost:3000,http://localhost
+      - DB_HOST=db
+      - DB_NAME=devtracktai
+      - DB_USER=devtracktai
+      - DB_PASS=db-devtracktai
+      - AWS_ACCESS_KEY_ID=AKIA5XR2W6Q72JKAEK3Q
+      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_STORAGE_BUCKET_NAME=unknownchatsbucket
+      - AWS_S3_REGION_NAME=ap-south-1
+      - AWS_S3_SIGNATURE_VERSION=s3v4
+      - AWS_S3_FILE_OVERWRITE=0
+      - AWS_QUERYSTING_AUTH=0
+      - DEFAULT_FILE_STORAGE=storages.backends.s3boto3.S3Boto3Storage
+      - EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+      - EMAIL_HOST=smtp.gmail.com
+      - EMAIL_HOST_USER=sumit.unknownchats@gmail.com
+      - EMAIL_HOST_PASSWORD=9713751690@Sumit
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_DB=devtracktai
+      - POSTGRES_USER=devtracktai
+      - POSTGRES_PASSWORD=db-devtracktai
