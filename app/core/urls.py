@@ -27,8 +27,15 @@ To delete those images, congainers, etc.
 
     To clear build cache
     docker builder prune
+
+all above by
+    docker system prune
+
+    all other
+    docker system prune -a
     
     All of these have a --help option.
+    https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes
 
 Docker commands to build app without loosing database and without deps/logs
     docker-compose -f docker-compose-deploy.yml build app
